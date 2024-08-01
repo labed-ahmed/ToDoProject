@@ -1,0 +1,27 @@
+﻿@model ToDo.Views.Edit.ViewModels.EditViewModel
+@{
+	ViewData["Title"] = "Edit";
+}
+
+@if(Model != null)
+{
+	<div class="text-center">
+		<h1 class="display-4">Edit Task</h1>
+	</div>
+	<form asp-controller="Edit" asp-action="Update">
+		<input type="hidden" asp-for="Id" />
+		<div class="mb-3">
+			<label asp-for="Title" class="form-label">Title:</label>
+			<input asp-for="Title" class="form-control" />
+			<span asp-validation-for="Title" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="Description" class="form-label">Description:</label>
+			<textarea asp-for="Description" class="form-control" rows="3"></textarea>
+			<span asp-validation-for="Description" class="text-danger"></span>
+		</div>
+		<input type="submit" value="Update" class="btn btn-primary" />
+	</form>
+}
+
+

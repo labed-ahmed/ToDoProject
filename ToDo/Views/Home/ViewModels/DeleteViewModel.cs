@@ -1,4 +1,4 @@
-﻿namespace ToDo.Models
+﻿namespace ToDo.Views.Home.ViewModels
 {
     public class DeleteViewModel
     {

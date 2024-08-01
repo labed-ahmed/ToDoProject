@@ -1,20 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ToDo.App.Tasks.Services;
 using ToDo.App.Tasks.ViewModels;
-using ToDo.Models;
+using ToDo.Views.Create.ViewModels;
 
 namespace ToDo.Controllers
 {
-    public class TaskController : Controller
+    public class CreateController : Controller
     {
         private readonly ITaskService _taskService;
 
-        public TaskController(ITaskService taskService)
+        public CreateController(ITaskService taskService)
         {
             _taskService = taskService;
         }
 
-		public IActionResult Create()
+		public IActionResult Index()
 		{
 			return View();
 		}
@@ -27,10 +27,11 @@ namespace ToDo.Controllers
                 var newTask = new CreateTaskViewModel();
                 newTask.Title = model.Title;
                 newTask.Description = model.Description;
+                newTask.Priority = model.Priority;
                 _taskService.Create(newTask);
             }
             
-            return View(model);
+            return RedirectToAction("Index","Home");
         }
 
 

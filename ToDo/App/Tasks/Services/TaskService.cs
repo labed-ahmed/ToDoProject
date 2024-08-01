@@ -17,6 +17,8 @@ namespace ToDo.App.Tasks.Services
             {
                 Description = model.Description,
                 Title = model.Title,
+                SubTasks = model.SubTasks,
+                Priority = model.Priority,
             };
             _context.Tasks.Add(task);
             _context.SaveChanges();
@@ -56,6 +58,7 @@ namespace ToDo.App.Tasks.Services
                 {
                     Id = task.Id,
                     Description = task.Description,
+                    Priority = task.Priority,
                     Title = task.Title,
 
                 });

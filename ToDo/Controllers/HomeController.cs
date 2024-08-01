@@ -1,10 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using ToDo.App.Tasks.Services;
 using ToDo.App.Tasks.ViewModels;
-using ToDo.BusinessObjects;
 using ToDo.Models;
+using ToDo.Views.Home.ViewModels;
 
 namespace ToDo.Controllers
 {
@@ -21,10 +20,11 @@ namespace ToDo.Controllers
             var model = new IndexViewModel();
             var taskList = _taskService.GetAll();
             foreach (var task in taskList) {
-                var newTask = new Models.TaskViewModel()
+                var newTask = new Views.Home.ViewModels.TaskViewModel()
                 {
                     Id = task.Id,
                     Title = task.Title,
+                    Priority = task.Priority,
                     Description = task.Description,
                 };
                 model.Tasks.Add(newTask);
@@ -39,11 +39,8 @@ namespace ToDo.Controllers
             _taskService.Delete(task);
             return RedirectToAction(nameof(Index));
         }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+      
+ 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

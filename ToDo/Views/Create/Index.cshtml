@@ -1,0 +1,36 @@
+﻿@using ToDo.BusinessObjects.Enums
+@model ToDo.Views.Create.ViewModels.CreateViewModel
+@{
+	ViewData["Title"] = "Create";
+}
+<div class="text-center">
+	<h1>Create Tasks</h1>
+</div>
+<form asp-action="Create">
+	<div class="mb-3">
+		<label asp-for="Title" class="form-label"></label>
+		<input asp-for="Title" class="form-control" />
+		<span asp-validation-for="Title" class="text-danger"></span>
+	</div>
+
+	<div class="mb-3">
+		<label asp-for="Description" class="form-label"></label>
+		<input asp-for="Description" class="form-control" />
+		<span asp-validation-for="Description" class="text-danger"></span>
+	</div>
+
+	<div class="mb-3">
+		<label asp-for="Priority" class="form-label"></label>
+		<select class="form-select" asp-for="Priority" asp-items="Html.GetEnumSelectList<EnumPriority>()">
+			<option value="" selected="selected">Please select</option>
+		</select>
+		<span asp-validation-for="Priority" class="text-danger"></span>
+	</div>
+
+	<input type="submit" value="Create" class="btn btn-primary" />
+</form>
+
+@section Scripts
+{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

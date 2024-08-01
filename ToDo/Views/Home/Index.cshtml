@@ -1,25 +1,20 @@
-﻿@model IndexViewModel
+﻿@using ToDo.BusinessObjects.Enums
+@model ToDo.Views.Home.ViewModels.IndexViewModel
 @{
+    ViewData["Title"] = "Home";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>
-        <a asp-controller="Task" asp-action="Create" >Create New</a>
-    </p>
-    <thead>
-          <tr>
-        </tr>  
-    </thead>
-
-        @* <a asp-controller="Task" asp-action="Delete" asp-route-id="@item.Id">Delete</a> *@
- 
+    <a asp-controller="Create" >Create New</a>
     <table class="table">
         <thead>
             <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Title</th>
                 <th scope="col">Description</th>
+                <th scope="col">Priority</th>
+                <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -29,7 +24,26 @@
                 <td>@item.Id</td>
                 <td>@item.Title</td>
                 <td>@item.Description</td>
-                <td><a asp-action="Delete" asp-route-id="@item.Id">Delete</a></td>
+                <td>
+                        @if (item.Priority == EnumPriority.urgent)
+                        {
+                            <span class="badge bg-danger">Urgent</span>
+                        }
+                        else @if (item.Priority == EnumPriority.important)
+                        {
+                            <span class="badge bg-success">Important</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">Default</span>
+                        }
+
+                </td>
+
+
+                <td><a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-controller="Edit" asp-action="Index" asp-route-id="@item.Id">Update</a>
+                </td>
             </tr>
             <tr>
                  
